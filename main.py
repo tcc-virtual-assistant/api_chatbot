@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from router import Router
+from rotas import router
 
 app = FastAPI()
 
