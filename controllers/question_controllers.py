@@ -14,7 +14,7 @@ async def list_question():
     return await Question.objects.all()
 
 @router.get('/{question_id}')
-async def questions_id(question_id: int, response: Response):
+async def questions_id(question_id: int, response: Response):   
     try: 
         question = await Question.objects.get(id = question_id)
         return question
