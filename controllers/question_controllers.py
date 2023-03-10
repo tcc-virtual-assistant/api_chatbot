@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Response
 from models.question import Question
 import ormar
+from models.requests.avillaAnswer_update import avillaAnswerUpdate
 
 router = APIRouter()
 
@@ -30,3 +31,14 @@ async def delete_question(question_id: int, response: Response):
     except:
         response.status_code = 404
         return {'mensagem':'id nao encontrado'}
+
+@router.patch('/{question_id}')
+async def path_question(avilla_update: avillaAnswerUpdate, question_id: int, response: Response):
+    try:
+        answer_atualizada = await Question.objects.get(id = question_id)
+        answer_propriedades = avilla_update.dict(exclude_unset=True)
+        await answer_atualizada.update(**answer_propriedades)
+        return answer_atualizada
+    except ormar.exceptions.NoMatch:
+        response.status_code = 404
+        return {'mensagem' : 'Entidade não encontrada'}

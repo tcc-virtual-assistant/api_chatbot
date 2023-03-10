@@ -22,6 +22,3 @@ def get_root():
     return{"mensagem":"waiting for questions.."}
 
 app.include_router(router, prefix="")
-
-if __name__ == "__main__":
-    uvicorn.run("main:app", port=5000, log_level="info")
